@@ -14,7 +14,7 @@ This is a personal project, still in its bootstrapping phase.
 
 So far Mofobox Radio has only been tested on Ubuntu 9.x+, and Mac OS 10.6
 
-Requirements
+## Requirements
 
 You must install:
 
@@ -23,7 +23,7 @@ You must install:
 * ezstream    - IceCast streaming client
 * icecast     - Streaming Server
 
-Caveats
+## Caveats
 
 * On Ubuntu most of these are available via apt-get. 
 * On Mac OS X you can install everything but ezstream via BREW. 
