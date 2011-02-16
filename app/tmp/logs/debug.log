@@ -1,0 +1,6 @@
+2011-02-14 07:10:16 Notice: Notice (8): Undefined property: View::$Paginator in [/users/fred/Sites/mofocake/app/views/artists/index.ctp, line 5]
+2011-02-14 07:29:52 Notice: Notice (8): Undefined property: View::$alphaPager in [/users/fred/Sites/mofocake/app/views/artists/alpha.ctp, line 4]
+2011-02-14 07:30:02 Notice: Notice (8): Undefined index: Album in [/users/fred/Sites/mofocake/app/views/artists/alpha.ctp, line 30]
+2011-02-14 07:51:33 Notice: Notice (8): Undefined index: id in [/users/fred/Sites/mofocake/app/controllers/artists_controller.php, line 23]
+2011-02-14 07:51:33 Notice: Notice (8): Undefined variable: sql in [/users/fred/Sites/mofocake/app/models/artist.php, line 45]
+2011-02-14 07:51:46 Notice: Notice (8): Undefined variable: sql in [/users/fred/Sites/mofocake/app/models/artist.php, line 45]

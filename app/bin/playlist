@@ -1,0 +1,4 @@
+#!/bin/bash
+SCRIPT_DIR=${0%/*};
+source $SCRIPT_DIR/env.sh
+$APP/vendors/cakeshell -console=$CONSOLE -app $APP mofobox playlist
