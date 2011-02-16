@@ -23,7 +23,7 @@ You must install:
 * ezstream    - IceCast streaming client
 * icecast     - Streaming Server
 
-## Caveats
+### Caveats
 
 * On Ubuntu most of these are available via apt-get. 
 * On Mac OS X you can install everything but ezstream via BREW. 
