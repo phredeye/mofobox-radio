@@ -49,6 +49,10 @@
  *
  */
 
+Configure::write("Mofobox.Roles", array(
+	"admin", "editor", "registered"
+));
+
 /** FIGLET CONFIG **/
 Configure::write("Mofobox.Figlet", array(
 	"font" => APP . DS . "vendors" . DS . "figlet-fonts" . DS . "big.flf"

@@ -43,11 +43,13 @@
 	        </div>
 	        <div class="grid_8">
 				<div id="identity" class="corner">
-					Hello, ThatMofoFred
+					<?php if($this->Session->check("Auth.User")): ?>
+					Hello, <?php echo $this->Session->read("Auth.User.username"); ?>
 	                &nbsp;|&nbsp;
-	                <a href="/user/logout">logout</a>
+					<?php echo $this->Html->link("logout", "/users/logout"); ?>
 	                &nbsp;|&nbsp;
-	                <a href="/user/myprofile">my profile</a>
+					<?php echo $this->Html->link("my profile", "/users/myprofile") ?>
+					<?php endif; ?>
 				</div>
 	        </div>
 	    	<div class="clear"></div>

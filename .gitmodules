@@ -1,0 +1,6 @@
+[submodule "app/plugins/migrations"]
+	path = app/plugins/migrations
+	url = git://github.com/CakeDC/migrations.git
+[submodule "app/plugins/ratings"]
+	path = app/plugins/ratings
+	url = git://github.com/CakeDC/ratings.git

@@ -43,36 +43,37 @@ class User extends AppModel {
 			),
 		),
 	);
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	
+	
+	public function attachPasswordMatchValidation() {
+		$this->validate[] = array(
+			"confirm_password" => array(
+				'rule' => array('passwordsMatchRule'),
+				'message' => 'Passwords do not match.'
+			)
+		);
+	}
+	
+	public function passwordsMatchRule($check) {
+		if($this->data[$this->name]["password"] == $this->data[$this->name][$check]) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Hook for hashing the password before saving.
+	 * @return boolean  true on successful save
+	 */
+	public function beforeSave() 
+	{
+	    if(isset($this->data["password"])) 
+	    {
+	        $this->data["password"] = Security::hash($this->data["password"],null,true);
+	    }
+	    return true;
+	}
 
-	var $hasMany = array(
-		'Artist' => array(
-			'className' => 'Artist',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Playlist' => array(
-			'className' => 'Playlist',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
 
 }
 ?>

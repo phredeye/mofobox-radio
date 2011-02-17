@@ -136,11 +136,14 @@ label {
 	font-size: 110%;
 	padding-right: 20px;
 }
+input:-webkit-autofill {
+        color: #2a2a2a !important; 
+    }
 input[type=text],
 input[type=password], 
 textarea {
     border: 1px solid #111;
-    background: #333;
+    background: #333 !important;
     color: #fff;
 	clear: both;
 	font-size: 140%;
