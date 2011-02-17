@@ -33,7 +33,15 @@ class ArtistsController extends AppController {
 			$this->Session->setFlash(__('Invalid artist', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('artist', $this->Artist->read(null, $id));
+		
+		$this->Artist->contain();
+		$artist = $this->Artist->read(null, $id);
+		$albums = $this->Artist->getAlbums($id);
+		
+		$this->set('artist', $artist);
+		$this->set("albums", $albums);
+
+		
 	}
 
 	function add() {

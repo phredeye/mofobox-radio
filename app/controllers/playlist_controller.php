@@ -1,9 +1,12 @@
 <?php
-class PlaylistsController extends AppController {
+class PlaylistController extends AppController {
 
-	var $name = 'Playlists';
+	public $name = 'Playlist';
 
-
+	public $uses = array("Playlist", "Track");
+	
+	public $components = array("JsonResponse", "Session");
+	
 	function stream() {
 		$this->layout = false;
 		header("Content-type: audio/x-scpls");
@@ -70,6 +73,45 @@ class PlaylistsController extends AppController {
 		}
 		$this->Session->setFlash(__('Playlist was not deleted', true));
 		$this->redirect(array('action' => 'index'));
+	}
+	
+	public function played() {
+		$playlist = $this->Playlist->getPlayedEntries(3);
+		$this->set("playlist", $playlist);	
+	}
+	
+	public function pending() {
+		
+		$playlist = $this->Playlist->getPending(6);
+		$this->set("playlist", $playlist);
+		
+	}
+	
+	public function now_playing() {
+		$playlist = $this->Playlist->getNowPlaying();
+		$this->set("playlist", $playlist);
+	}
+	
+	public function enqueue($id) {
+
+		$track = $this->Track->read(null, $id);
+		
+		if(!$this->Playlist->trackIsInQueue($id)) {
+			if($this->Playlist->enqueue($id)) {
+				$this->JsonResponse->isSuccess(true);
+				$this->JsonResponse->addMessage(sprintf(
+					"Track: %s was added to the playlist queue.", $track["Track"]["title"]
+					));
+			}
+		} else {
+			$this->JsonResponse->addError(sprintf(
+				"Track '%s' is already in queue", $track["Track"]["title"]
+				));
+			
+		}
+		
+		echo $this->JsonResponse->encode();
+		exit();
 	}
 }
 ?>

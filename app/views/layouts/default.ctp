@@ -6,7 +6,8 @@
   <?php 
 	echo $this->Html->script(array(
 		"jquery-1.3.2.min",
-		"jquery.corner"
+		"jquery.corner",
+		"jquery.jgrowl"
 		));
 		
 	echo $this->Html->css(array(
@@ -14,7 +15,8 @@
 		"text",
 		"grid",
 		"styles",
-		"generic"
+		"generic",
+		"jquery.jgrowl"
 	));
 	
 	echo $scripts_for_layout;
@@ -37,11 +39,11 @@
     
     <div id="header" class="corner-top">
         	<div id="logo" class="grid_8">
-	                <h1>Mofobox Radio</h1>
+	        	<?php echo $this->Html->image("logo.png", array("style" => "margin-top:20px;")) ?>
 	        </div>
 	        <div class="grid_8">
-				<div id="identity">
-					Hello, Mofo
+				<div id="identity" class="corner">
+					Hello, ThatMofoFred
 	                &nbsp;|&nbsp;
 	                <a href="/user/logout">logout</a>
 	                &nbsp;|&nbsp;
@@ -58,7 +60,7 @@
                 <li><?php echo $this->Html->link("artists", "/artists"); ?></li>
 				<li>
 				<?php 
-					echo $this->Html->link("listen", sprintf("%s.pls", Configure::read("Mofobox.StreamURL"))); 
+					echo $this->Html->link("listen", sprintf("%s.m3u", Configure::read("Mofobox.StreamURL"))); 
 				?>
 				</li>
             </ul>
@@ -66,8 +68,11 @@
     </div>        
     <div class="clear"></div>
     <div id="content">
-            <?php echo $this->Session->flash(); ?>
+			<div id="messages">
+            	<?php echo $this->Session->flash(); ?>
+			</div>
             <?php echo $content_for_layout ?>
+			<div class="clear"></div>
     </div>        
 	<div class="clear"></div>
 	

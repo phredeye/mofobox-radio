@@ -49,12 +49,14 @@
  *
  */
 
+/** FIGLET CONFIG **/
+Configure::write("Mofobox.Figlet", array(
+	"font" => APP . DS . "vendors" . DS . "figlet-fonts" . DS . "big.flf"
+	));
 
 /** 
 * Allow dynamic loading of Zend Framework classes
 */
-
-
 set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
  	realpath( ROOT . DS . APP_DIR . DS . "vendors" . DS)
@@ -62,4 +64,5 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require_once("Zend/Loader.php");
 
+/** MOFOBOX CONFIG **/
 require_once("mofobox.php");

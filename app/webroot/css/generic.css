@@ -184,15 +184,24 @@ input[type=submit] {
 /* Notices and Errors */
 div.message {
 	clear: both;
-	color: #900;
+	color: green;
 	font-size: 140%;
 	font-weight: bold;
-	margin: 1em 0;
+	margin: 1em 1em;
+	background: #111;
+	border: 2px solid green;
+	text-align:center;
+	padding:4%;
 }
 div.error-message {
 	clear: both;
 	color: #900;
 	font-weight: bold;
+	background: #111;
+	text-align:center;
+	padding:4%;
+	margin: 1em 1em;
+	border: 2px solid #900;
 }
 p.error {
 	background-color: #e32;

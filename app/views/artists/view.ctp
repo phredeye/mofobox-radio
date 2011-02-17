@@ -1,95 +1,152 @@
-<div class="artists view">
-<h2><?php  __('Artist');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $artist['Artist']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $artist['Artist']['name']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Comment'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $artist['Artist']['comment']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $artist['Artist']['created']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $artist['Artist']['modified']; ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Artist', true), array('action' => 'edit', $artist['Artist']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Artist', true), array('action' => 'delete', $artist['Artist']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $artist['Artist']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Artists', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Artist', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Tracks', true), array('controller' => 'tracks', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Track', true), array('controller' => 'tracks', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php __('Related Tracks');?></h3>
-	<?php if (!empty($artist['Track'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Track Number'); ?></th>
-		<th><?php __('Title'); ?></th>
-		<th><?php __('Artist Id'); ?></th>
-		<th><?php __('Album Id'); ?></th>
-		<th><?php __('Genre'); ?></th>
-		<th><?php __('Year'); ?></th>
-		<th><?php __('Duration'); ?></th>
-		<th><?php __('Filename'); ?></th>
-		<th><?php __('Created'); ?></th>
-		<th><?php __('Modified'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($artist['Track'] as $track):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $track['id'];?></td>
-			<td><?php echo $track['track_number'];?></td>
-			<td><?php echo $track['title'];?></td>
-			<td><?php echo $track['artist_id'];?></td>
-			<td><?php echo $track['album_id'];?></td>
-			<td><?php echo $track['genre'];?></td>
-			<td><?php echo $track['year'];?></td>
-			<td><?php echo $track['duration'];?></td>
-			<td><?php echo $track['filename'];?></td>
-			<td><?php echo $track['created'];?></td>
-			<td><?php echo $track['modified'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'tracks', 'action' => 'view', $track['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'tracks', 'action' => 'edit', $track['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'tracks', 'action' => 'delete', $track['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $track['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
+	<div class="grid_16">
+		<div class="header corner">
+			<em>Artist:</em>
+			<br/>
+			<h2><?php echo $artist["Artist"]["name"] ?></h2>
+			<div style="float: right; clear:left;">
+			[<?php 
+			echo $this->Html->link("Edit", array(
+				"controller" => "artists",
+				"action" => "edit",
+				$artist["Artist"]["id"]
+			));
+			?>]
+			</div>
+			<div class="clear"></div>			
+		</div>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Track', true), array('controller' => 'tracks', 'action' => 'add'));?> </li>
-		</ul>
 	</div>
-</div>
+	<div class="clear"></div>
+	
+	<div class="grid_10">
+		<?php echo $this->Theme->boxTop("About the artist"); ?>
+		<?php if(empty($artist["Artist"]["comment"])): ?>
+			<div style="text-align: center;padding:30px 0px;">There is no information about this artist</div>
+		<?php else: 		
+				echo $artist["Artist"]["comment"]; 
+			endif;
+		?>
+		<?php echo $this->Theme->boxEnd(); ?>
+	</div>
+	<div class="grid_6">
+		<?php echo $this->Theme->boxTop("Meta"); ?>
+		<dl><?php $i = 0; $class = ' class="altrow"';?>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $artist['Artist']['id']; ?>
+				&nbsp;
+			</dd>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Added'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $artist['Artist']['created']; ?>
+				&nbsp;
+			</dd>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Last Edit'); ?></dt>
+			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+				<?php echo $artist['Artist']['modified']; ?>
+				&nbsp;
+			</dd>
+		</dl>
+		<?php echo $this->Theme->boxEnd(); ?>
+	</div>
+	<div class="clear"></div>
+	
+	<div class="grid_16">
+		<div class="header corner">
+			<h3>Albums</h3>
+		</div>
+	</div>
+	<div class="clear"></div>
+	
+	<?php foreach($albums as $album): ?>
+	<div style="margin-bottom:20px;">
+		<div class="grid_6">
+			<div class="large_cover">
+			<?php echo $this->Theme->boxTop($album["Album"]["title"]) ?>
+			<?php
+			 $img = "llama.png";
+			 $alt = "Sorry, there is no album art for this artist. So have a llama.";
+	
+			 if(isset($album["Album"]["large_image"])) {
+				$img = $album["Album"]["large_image"];
+				$alt = $album["Album"]["title"];
+			 }
+			 echo $this->Html->image($img, array("alt" => $alt, "title" => $alt)); 
+			?>
+			<?php echo $this->Theme->boxEnd(); ?>
+			</div>
+		</div>
+		<div class="grid_10">
+			<?php echo $this->Theme->boxTop("Tracks"); ?>
+			<table border="0" cellspacing="5" cellpadding="5">
+				<tr>
+					<th>Title</th>
+					<th>Length</th>
+					<th class="actions">&nbsp;</th>
+				</tr>
+				<?php foreach($album["Tracks"] as $track):  ?>
+				<tr>
+					<td><?php echo $track["Track"]["title"] ?></td>
+					<td><?php echo $track["Track"]["duration"] ?></td>
+					<td class="actions">
+						<?php 
+							echo $this->Html->link("Request", 
+								array(
+									"controller" => "playlist",
+									"action" => "enqueue",
+									$track["Track"]["id"]
+									),
+								array(
+									"class" => "request-link"
+									)
+								); 
+						?>
+						&nbsp;|&nbsp;
+						<?php
+						echo $this->Html->link("View", array(
+							"controller"=> "tracks",
+							"action" => "view",
+							$track["Track"]["id"]
+						));
+						?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</table>
+			<?php echo $this->Theme->boxEnd(); ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php endforeach; ?>
+	
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		
+		$(".request-link").click(function(event) {
+			
+			event.stopPropagation();
+			
+			var url = $(this).attr("href");
+			
+			$.getJSON(url, function(response) {
+				console.log(response["errors"]);
+				
+				if(response.success) {
+					for(i in response.messages) {
+						console.log("Message:" + response.messages[i]);
+						$.jGrowl(response.messages[i], {header: "Success", theme: "message"});
+					}
+				} else {
+					for(i in response.errors) {
+						console.log("Error: " + response.errors[i]);
+						$.jGrowl(response.errors[i], { header: "Error!", theme: "error"});
+					}
+				}
+			});
+			
+			return false;
+		
+		});
+	});
+</script>
+	

@@ -42,16 +42,18 @@ class Playlist extends AppModel {
 		)
 	);
 	
-	public function getPlayedEntries($limit = 10) 
+	public function getPlayedEntries($limit = 8) 
 	{
+		$limit = $limit+1;
 		$this->contain("User","Track", "Track.Artist", "Track.Album");
 		
 		$entries = $this->find('all', array(
-			'conditions' => array('Playlist.played' => false),
+			'conditions' => array('Playlist.played' => true),
 			'order' => "Playlist.modified DESC",
 			'limit' => $limit
 		));
 		
+		array_shift($entries);
 		return $entries;	
 	}
 	
@@ -68,7 +70,7 @@ class Playlist extends AppModel {
 		return $entry[0];		
 	}
 	
-	public function getPending($limit = 10)
+	public function getPending($limit = 8)
 	{
 		$this->contain("User","Track", "Track.Artist", "Track.Album");
 		
@@ -96,19 +98,33 @@ class Playlist extends AppModel {
 		return $entry[0];
 	}
 	
-	public function enqueue($track_id, $user_id = 0) {
-		$this->save(array("track_id" => $track_id, "user_id" => $user_id));
+	public function trackIsInQueue($track_id) {
+		$count = $this->find('count', array(
+			"conditions" => array("track_id" => $track_id, "played" => false)
+		));
+		if($count > 0) {
+			return true;
+		}
+		return false;
 	}
 	
-	public function enqueueRandom($minRating = 0, $user_id = 0) {
+	public function enqueue($track_id, $user_id = 0) {
+		return $this->save(array("track_id" => $track_id, "user_id" => $user_id));
+	}
+	
+	public function enqueueRandom($user_id = 0) {
 		
 		// amazon removed the reviews/rankings from their API :(
+		$this->Track->contain();
 		$track = $this->Track->find('all', array("order" => "RAND()", "limit"=>1));
-			
-		$this->save(array(
+
+		$data = $this->create(array(
 			"track_id" => $track[0]["Track"]["id"],
-			"user_id" => $user_id
+			"user_id" => $user_id, 
+			"played" => 0
 		));
+		
+		return $this->save($data);
 		
 	}
 }

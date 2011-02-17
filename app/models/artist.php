@@ -31,6 +31,30 @@ class Artist extends AppModel {
 		)
 	);
 	
+	public function getAlbums($id) 
+	{
+		
+		$SQL = <<<SQL
+SELECT DISTINCT(Album.id), Album.*
+FROM albums Album, tracks Track
+WHERE Album.id = Track.album_id
+AND Track.artist_id = $id
+SQL;
+
+		$albums = $this->query($SQL);
+		
+		$this->Track->contain();
+		foreach($albums as $key => $album) {
+			
+			$albums[$key]["Tracks"] = $this->Track->find('all', 
+					array('conditions' => array('Track.album_id' => $album["Album"]["id"])
+				));
+			
+		}
+		
+		return $albums;
+	}
+	
 	
 	public function getAlbumArt($id) {
 		$SQL = <<<SQL

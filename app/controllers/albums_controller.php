@@ -9,10 +9,12 @@ class AlbumsController extends AppController {
 	}
 
 	function view($id = null) {
+		
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid album', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		$this->Album->contain("Track", "Track.Artist");
 		$this->set('album', $this->Album->read(null, $id));
 	}
 

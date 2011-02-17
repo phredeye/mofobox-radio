@@ -1,5 +1,5 @@
 body {
- background:#2D2D2D;
+ background:#2D2D2D url(/img/wood.jpg);
  font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;
  color:#fff;
 }
@@ -35,12 +35,15 @@ h3 {
 
 #header #identity {
 	text-align: right;
-	padding-top: 20px;
-	padding-right: 10px;
+	margin-top: 10px;
+	padding:10px 20px;
+	background: #111;
+	width: 270px;
+	float:right;
 }
 
 #nav {
-   background:#541100 url(/img/nav-gradient.gif) repeat-x;
+   background:#541100;
 /*    background: #a34a21; */
 /*	background: #E09200;
 	background: #E38400
@@ -88,7 +91,7 @@ h3 {
 }
 
 #footer {
-	border-top: 1px solid #fff;
+	border-top: 1px solid #333;
 	margin-top: 30px;
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -112,33 +115,42 @@ a:hover {
     color: #541100;
 }
 
+.box {
+	background: #111;
+	padding: 10px;
+	margin-bottom: 20px;
+}
 
+.box-title {
+    background: #111 url(/img/top-gradient.gif) repeat-x;
+}
+
+.box-title h2 , .box-title h3, .box-title h4 {
+    margin:0px;
+    padding:10px 20px;
+}
 
 .title {
     background: #111 url(/img/top-gradient.gif) repeat-x;
     margin-bottom: 10px;
 }
 
-.title h2 , .title h3{
+.title h2 , .title h3, .title h4 {
     margin:0px;
-    padding:10px;
+    padding:10px 20px;
 }
 
-.page_title {
-    margin-bottom:10px;
-    background: #222;
-
+.header {
+	padding:20px;
+	background-color:#111;
+	margin-bottom:20px;
 }
 
-.page_title h2, .page_title h3 {
-    margin:0px 5px;
-    padding: 10px;
+.header h1, .header h2, .header h3, .header h4 {
+	padding: 0;
+	margin:0;
 }
 
-.page_subtitle {
-    margin-bottom:10px;
-    padding:10px;
-}
 
 .album_grid {
     float:left;
@@ -152,6 +164,7 @@ a:hover {
 }
 
 
+
 .album_grid a {
     font-size: 11px;
     text-decoration: none;
@@ -161,35 +174,37 @@ a:hover {
     color: #541100;
 }
 
-.small_cover, .small_cover img{
+.small_cover {
     width: 160px;
     height: 160px;
     margin-bottom:10px;
 }
 
-.small_cover img {
+.small_cover a img{
+	width: 160px;
+	height: 160px;
     border: 1px solid #222;
 }
 
 
 .medium_cover {
-    background: #111;
-    width:250px;
+    background: #222;
+	text-align:center;
 }
 
 .medium_cover img  {
-    padding:20px;  
+    padding:4%;  
+    width:92%;
 }
 
 
 
 .large_cover {
-    background: #111;
-    width:340px;
+
 }
 
 .large_cover img {
-    padding:20px;
+    width:335px;
 }
 
 
@@ -218,6 +233,11 @@ a:hover {
 #alpha_pager span a:hover {
     background: #541100;
     color: #fff;
+}
+
+#alpha_pager span a.current {
+	background: #541100;
+	color: #fff;
 }
 
 #now_playing {

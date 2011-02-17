@@ -29,8 +29,11 @@ class IndexTask extends Shell
 	
 	private function printHeader() 
 	{
-		$this->hr(2);
-		$this->log("MOFOBOX INDEXER");
+		Zend_Loader::loadClass("Zend_Text_Figlet");
+		$figlet = new Zend_Text_Figlet(Configure::read("Mofobox.Figlet"));
+		$this->nl();
+		$this->out($figlet->render("Mofobox Radio"));
+		$this->nl();
 		$this->log("Indexing dir: %s", $this->mediaDir);
 		$this->hr(2);
 	}

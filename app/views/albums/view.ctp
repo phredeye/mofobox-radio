@@ -1,130 +1,116 @@
-<div class="albums view">
-<h2><?php  __('Album');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Amazon Asin'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['amazon_asin']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Amazon Detail Page Url'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['amazon_detail_page_url']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Amazon Average Rating'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['amazon_average_rating']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Small Image'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['small_image']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Medium Image'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['medium_image']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Large Image'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['large_image']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Genre'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['genre']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Title'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['title']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Year'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['year']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['created']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $album['Album']['modified']; ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Album', true), array('action' => 'edit', $album['Album']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Album', true), array('action' => 'delete', $album['Album']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $album['Album']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Albums', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Album', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Tracks', true), array('controller' => 'tracks', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Track', true), array('controller' => 'tracks', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php __('Related Tracks');?></h3>
-	<?php if (!empty($album['Track'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Track Number'); ?></th>
-		<th><?php __('Title'); ?></th>
-		<th><?php __('Artist Id'); ?></th>
-		<th><?php __('Album Id'); ?></th>
-		<th><?php __('Genre'); ?></th>
-		<th><?php __('Year'); ?></th>
-		<th><?php __('Duration'); ?></th>
-		<th><?php __('Filename'); ?></th>
-		<th><?php __('Created'); ?></th>
-		<th><?php __('Modified'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($album['Track'] as $track):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
+<div class="grid_16">
+	<div class="header corner">
+		<em>Album Title:</em>
+		<br/>
+		<h3><?php echo $album["Album"]["title"] ?></h3>
+		<em>Artist(s):</em>
+		<br/>
+		<?php 
+		$prevArtists = array();
+		foreach($album["Track"] as $track) {
+			$name = $track["Artist"]["name"];
+			if(!in_array($name, $prevArtists)) {
+				$prevArtists[] = $name;
+				printf("<h4>%s</h4>", $this->Html->link($name, array(
+					"controller" => "artists",
+					"action" => "view",
+					$track["Artist"]["id"]
+				)));
 			}
+		}
 		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $track['id'];?></td>
-			<td><?php echo $track['track_number'];?></td>
-			<td><?php echo $track['title'];?></td>
-			<td><?php echo $track['artist_id'];?></td>
-			<td><?php echo $track['album_id'];?></td>
-			<td><?php echo $track['genre'];?></td>
-			<td><?php echo $track['year'];?></td>
-			<td><?php echo $track['duration'];?></td>
-			<td><?php echo $track['filename'];?></td>
-			<td><?php echo $track['created'];?></td>
-			<td><?php echo $track['modified'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'tracks', 'action' => 'view', $track['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'tracks', 'action' => 'edit', $track['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'tracks', 'action' => 'delete', $track['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $track['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Track', true), array('controller' => 'tracks', 'action' => 'add'));?> </li>
-		</ul>
 	</div>
 </div>
+<div class="clear"></div>
+
+
+<div style="margin-bottom:20px;">
+	<div class="grid_6">
+
+		<?php echo $this->Theme->boxTop("Cover Art") ?>
+		<div class="medium_cover corner">
+		<?php
+		 $img = "llama.png";
+		 $alt = "Sorry, there is no album art for this artist. So have a llama.";
+
+		 if(!empty($album["Album"]["large_image"])) {
+			$img = $album["Album"]["large_image"];
+			$alt = $album["Album"]["title"];
+		 }
+		 echo $this->Html->image($img, array("alt" => $alt, "title" => $alt)); 
+		?>
+		</div>
+		<?php echo $this->Theme->boxEnd(); ?>
+	</div>
+	<div class="grid_10">
+		<?php echo $this->Theme->boxTop("Tracks"); ?>
+		<table border="0" cellspacing="5" cellpadding="5">
+			<tr>
+				<th>Title</th>
+				<th>Length</th>
+				<th class="actions">&nbsp;</th>
+			</tr>
+			<?php foreach($album["Track"] as $track):  ?>
+			<tr>
+				<td><?php echo $track["title"] ?></td>
+				<td><?php echo $track["duration"] ?></td>
+				<td class="actions">
+					<?php 
+						echo $this->Html->link("Request", 
+							array(
+								"controller" => "playlist",
+								"action" => "enqueue",
+								$track["id"]
+								),
+							array(
+								"class" => "request-link"
+								)
+							); 
+					?>
+					&nbsp;|&nbsp;
+					<?php
+					echo $this->Html->link("View", array(
+						"controller"=> "tracks",
+						"action" => "view",
+						$track["id"]
+					));
+					?>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
+		<?php echo $this->Theme->boxEnd(); ?>
+	</div>
+	<div class="clear"></div>
+</div>
+
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+
+			$(".request-link").click(function(event) {
+
+				event.stopPropagation();
+
+				var url = $(this).attr("href");
+
+				$.getJSON(url, function(response) {
+					console.log(response["errors"]);
+
+					if(response.success) {
+						for(i in response.messages) {
+							console.log("Message:" + response.messages[i]);
+							$.jGrowl(response.messages[i], {header: "Success", theme: "message"});
+						}
+					} else {
+						for(i in response.errors) {
+							console.log("Error: " + response.errors[i]);
+							$.jGrowl(response.errors[i], { header: "Error!", theme: "error"});
+						}
+					}
+				});
+
+				return false;
+
+			});
+		});
+	</script>

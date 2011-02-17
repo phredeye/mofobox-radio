@@ -9,8 +9,11 @@ class PlaylistTask extends Shell {
 		$entry =  $this->Playlist->getNextTrack();
 		
 		if(empty($entry)) {
+			$this->out("Enqueueing randoms.");
 			for($i = 0; $i < 7; $i++) {
-				$this->Playlist->enqueueRandom();
+				if(!$this->Playlist->enqueueRandom()) {
+					$this->err("Error enqueueing random track!");
+				}
 			}
 			$entry = $this->Playlist->getNextTrack();
 		}

@@ -14,14 +14,14 @@
        output format of the stream.
      -->
     <format>MP3</format>
-    <filename>/Users/fred/Sites/mofocake/app/bin/playlist</filename>
+    <filename>/Users/fred/Sites/mofobox-radio/app/bin/playlist</filename>
     <!--
        Indicate that <filename> contains an executable program or script,
        which prints a single line with a filename to standard output:
      -->
     <playlist_program>1</playlist_program>
     <!-- Use the metadata.php script to get metadata -->
-    <metadata_progname>/Users/fred/Sites/mofocake/app/bin/metadata</metadata_progname>
+    <metadata_progname>/Users/fred/Sites/mofobox-radio/app/bin/metadata</metadata_progname>
     <!-- Set the metadata string according to this format: -->
     <metadata_format>@s@: @a@ - @t@</metadata_format>
     

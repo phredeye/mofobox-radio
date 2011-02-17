@@ -8,12 +8,17 @@ class AmazonTask extends Shell {
 	
 	public function execute() 
 	{
+		Zend_Loader::loadClass("Zend_Text_Figlet");
+		Zend_Loader::loadClass("Zend_Service_Amazon");
+
+		$figlet = new Zend_Text_Figlet(Configure::read("Mofobox.Figlet"));
+		
 		$this->nl();
-		$this->out("MOFOBOX RADIO");
+		$this->out($figlet->render("MofoBox Radio"));
+		$this->nl();
 		$this->out("Fetching Amazon Album Data:");
 		$this->hr(3);
 		
-		Zend_Loader::loadClass("Zend_Service_Amazon");
 		try {
 			$this->amazon = new Zend_Service_Amazon(
 				Configure::read("Amazon.ApiKey"), 'US', Configure::read("Amazon.SecretKey")
@@ -69,7 +74,6 @@ class AmazonTask extends Shell {
 				
 				$data["amazon_asin"] = $result->ASIN;
 				$data["amazon_detail_page_url"] = $result->DetailPageURL;
-            //    $data["amazon_average_rating"] = $result->AverageRating;
 
                 if(!is_null($result->SmallImage)) { $data["small_image"] = $result->SmallImage->Url->getUri(); }
                 if(!is_null($result->MediumImage)) { $data["medium_image"] = $result->MediumImage->Url->getUri(); }
