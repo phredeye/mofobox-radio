@@ -1,13 +1,7 @@
-*/.DS_Store
 cake/*
 plugins/*
 vendors/*
 app/tmp/*
 app/tmp/cache/*
 app/tmp/logs/*
-
-app/.DS_Store
-
-app/.DS_Store
-
 app/.DS_Store
