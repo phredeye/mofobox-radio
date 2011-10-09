@@ -4,3 +4,6 @@
 [submodule "app/plugins/ratings"]
 	path = app/plugins/ratings
 	url = git://github.com/CakeDC/ratings.git
+[submodule "app/plugins/comments"]
+	path = app/plugins/comments
+	url = https://github.com/CakeDC/comments.git

@@ -168,11 +168,13 @@ input[type=checkbox] {
 	margin: 0px 6px 7px 2px;
 	width: auto;
 }
+/*
 input[type=radio] {
 	float:left;
 	width:auto;
 	margin: 0 3px 7px 0;
 }
+*/
 div.radio label {
 	margin: 0 0 6px 20px;
 }

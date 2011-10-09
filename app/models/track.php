@@ -1,7 +1,14 @@
 <?php
 class Track extends AppModel {
-	var $name = 'Track';
-	var $validate = array(
+	public $name = 'Track';
+	
+	public $actsAs = array(
+		"Containable",
+		"Ratings.Ratable" => array(
+			"saveToField" => true
+		));
+	
+	public $validate = array(
 		'title' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),

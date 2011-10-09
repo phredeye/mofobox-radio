@@ -5,18 +5,23 @@
   
   <?php 
 	echo $this->Html->script(array(
-		"jquery-1.3.2.min",
+		"jquery-1.4.4.min",
+		"jquery-ui-1.8.9.custom.min",
+		"jquery.ui.stars.min",
 		"jquery.corner",
 		"jquery.jgrowl"
 		));
 		
 	echo $this->Html->css(array(
 		"reset",
-		"text",
 		"grid",
+		"text",		
 		"styles",
 		"generic",
+		"custom-theme/jquery-ui-1.8.9.custom",		
+		"crystal-stars",		
 		"jquery.jgrowl"
+		
 	));
 	
 	echo $scripts_for_layout;
@@ -26,9 +31,12 @@
 	
 	<script>
 	    $(document).ready(function() { 
+
 			$(".corner").corner();
 			$(".corner-bottom").corner("bottom");
 			$(".corner-top").corner("top");
+			
+			$("button, input:submit, .button").button();
 	    });
 	</script>
 

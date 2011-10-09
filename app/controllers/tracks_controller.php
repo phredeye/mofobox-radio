@@ -2,6 +2,9 @@
 class TracksController extends AppController {
 
 	var $name = 'Tracks';
+	
+	public $helpers = array("Stars", "SongInfo");
+	public $components = array("Ratings.Ratings");
 
 	function index() {
 		$this->Track->recursive = 0;
@@ -9,10 +12,12 @@ class TracksController extends AppController {
 	}
 
 	function view($id = null) {
+
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid track', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		
 		$this->set('track', $this->Track->read(null, $id));
 	}
 

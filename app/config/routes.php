@@ -32,4 +32,5 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-	Router::parseExtensions();
+    Router::mapResources(array("tracks","artists","albums","playlist","users"));
+	Router::parseExtensions('json');

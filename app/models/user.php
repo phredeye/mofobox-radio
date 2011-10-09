@@ -61,6 +61,11 @@ class User extends AppModel {
 		return false;
 	}
 	
+	public function createUser($data) {
+		$this->attachPasswordMatchValidation();
+		$this->save($data);
+	}
+	
 	/**
 	 * Hook for hashing the password before saving.
 	 * @return boolean  true on successful save
