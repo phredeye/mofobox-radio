@@ -5,3 +5,4 @@ app/tmp/*
 app/tmp/cache/*
 app/tmp/logs/*
 app/.DS_Store
+nbproject/

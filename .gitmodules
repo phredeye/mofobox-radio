@@ -7,3 +7,15 @@
 [submodule "app/plugins/comments"]
 	path = app/plugins/comments
 	url = https://github.com/CakeDC/comments.git
+[submodule "app/webroot/steal"]
+	path = app/webroot/steal
+	url = git://github.com/jupiterjs/steal.git
+[submodule "app/webroot/jquery"]
+	path = app/webroot/jquery
+	url = git://github.com/jupiterjs/jquerymx.git
+[submodule "app/webroot/documentjs"]
+	path = app/webroot/documentjs
+	url = git://github.com/jupiterjs/documentjs
+[submodule "app/webroot/funcunit"]
+	path = app/webroot/funcunit
+	url = git://github.com/jupiterjs/funcunit.git
