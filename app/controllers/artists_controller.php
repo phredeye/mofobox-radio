@@ -14,7 +14,7 @@ class ArtistsController extends AppController
                 "contain" => array( ),
                 "order" => "Artist.name"
             );
-            $this->set("data", $this->paginate());
+            $this->set("artists", $this->paginate());
         }
         else
         {
